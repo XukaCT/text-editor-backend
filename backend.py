@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from pymongo import MongoClient
+import os
 
 client = MongoClient('mongodb+srv://TextEditor:3dKw1b7chPWDjpsf@cluster0.o9jjzyp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 db = client['TextEditor']
@@ -43,4 +44,5 @@ def list_files():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
